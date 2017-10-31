@@ -1,0 +1,18 @@
+No matter the language
+Think about the data format (JSON ?)
+
+Sails.js can create a REST API for you by just typing
+sails generate api <model_name>
+https://sailsjs.com/
+
+Restify (Node.js)
+Express (Node.js)
+HAPI (Node.js)
+
+Falcon Framework
+
+Python + Flask
+Python + Django
+
+Golang with Gorilla
+https://semaphoreci.com/community/tutorials/building-and-testing-a-rest-api-in-go-with-gorilla-mux-and-postgresql
