@@ -1,0 +1,31 @@
+$> nmap --script "ssl*" -p 443 127.0.0.1 > all
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2017-11-14 18:30 CET
+Nmap scan report for localhost.localdomain (127.0.0.1)
+Host is up (0.000064s latency).
+
+PORT    STATE SERVICE
+443/tcp open  https
+| ssl-cert: Subject: commonName=127.0.0.1/organizationName=Internet Widgits Pty Ltd/stateOrProvinceName=Some-State/countryName=AU
+| Issuer: commonName=127.0.0.1/organizationName=Internet Widgits Pty Ltd/stateOrProvinceName=Some-State/countryName=AU
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2017-11-05T21:09:17
+| Not valid after:  2027-11-03T21:09:17
+| MD5:   0fb6 67e0 20c0 fa8e cfe6 3da1 0b78 4e57
+|_SHA-1: cd89 720f 5ffc 3afd 9376 0963 d939 0eed 9415 0e60
+| ssl-enum-ciphers: 
+|   TLSv1.2: 
+|     ciphers: 
+|       TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (secp521r1) - A
+|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp521r1) - A
+|       TLS_RSA_WITH_AES_256_GCM_SHA384 (rsa 2048) - A
+|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A
+|     compressors: 
+|       NULL
+|     cipher preference: server
+|_  least strength: A
+|_sslv2-drown: 
+
+Nmap done: 1 IP address (1 host up) scanned in 0.40 seconds
