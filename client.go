@@ -53,6 +53,7 @@ func createHandler(f func(T interface{}), T interface{}) func(w http.ResponseWri
   }
 }
 
+/* Create client (register in db/store) */
 func createClient(T interface{}) {
   client := *(reflect.ValueOf(T).Elem()).Addr().Interface().(*Client)
   fmt.Printf("New client type %T\n", client)
