@@ -1,6 +1,7 @@
 package main
 
 import (
+  "fmt"
   "log"
   "io"
   "io/ioutil"
@@ -51,13 +52,16 @@ func createHandler(f func(T interface{}) error, T interface{}) func(w http.Respo
         panic(err)
       }
     }
-
-    f(newItem)
-
-    w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-    w.WriteHeader(http.StatusCreated)
-    if err := json.NewEncoder(w).Encode(newItem); err != nil {
-      panic(err)
+    if err := f(newItem) ; err != nil {
+      w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+      w.WriteHeader(http.StatusConflict)
+      fmt.Println(err)
+    } else {
+      w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+      w.WriteHeader(http.StatusCreated)
+      if err := json.NewEncoder(w).Encode(newItem); err != nil {
+        panic(err)
+      }
     }
   }
 }

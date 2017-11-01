@@ -4,7 +4,7 @@ import (
   "reflect"
   "net/http"
   "fmt"
-  //"errors"
+  "errors"
 
   "github.com/gorilla/mux"
 )
@@ -33,6 +33,8 @@ func createClient(T interface{}) error {
   client := *(reflect.ValueOf(T).Elem()).Addr().Interface().(*Client)
   fmt.Printf("New client type %T\n", client)
   fmt.Printf("New client %v\n", client)
-  //return errors.New("np")
+  if 1 == 2 {
+    return errors.New("Cannot create client")
+  }
   return nil
 }
