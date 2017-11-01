@@ -1,6 +1,19 @@
 package main
 
+import (
+  "fmt"
+  "strconv"
+)
+
 func main() {
-  a := App{Address:"127.0.0.1:3000", Timeout:15}
+  var c Config
+  if e := c.Get("backend.toml"); e != nil {
+    fmt.Println(e)
+  }
+  fmt.Println(c.General.Version)
+  fmt.Println(c.General.Address)
+  fmt.Println(c.General.Port)
+  fmt.Printf("dt %T\n" ,c.General.Timeout.Duration)
+  a := App{Address:c.General.Address+":"+strconv.Itoa(c.General.Port), Timeout:15}
   a.Run()
 }
