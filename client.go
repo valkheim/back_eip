@@ -53,6 +53,10 @@ func createHandler(f func(T interface{}), T interface{}) func(w http.ResponseWri
   }
 }
 
-func createClient(client interface{}) {
+func createClient(T interface{}) {
+  v := reflect.ValueOf(T).Elem()
+  ptr := v.Addr().Interface().(*Client)
+  client := *ptr
+  fmt.Printf("New client type %T\n", client)
   fmt.Printf("New client %v\n", client)
 }
