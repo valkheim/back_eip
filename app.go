@@ -33,7 +33,7 @@ func (app *App) Run() {
 }
 
 /* Create new item */
-func createHandler(f func(T interface{}), T interface{}) func(w http.ResponseWriter, r *http.Request) {
+func createHandler(f func(T interface{}) error, T interface{}) func(w http.ResponseWriter, r *http.Request) {
   return func(w http.ResponseWriter, r *http.Request) {
     newItem := reflect.ValueOf(T).Interface()
 
@@ -44,7 +44,6 @@ func createHandler(f func(T interface{}), T interface{}) func(w http.ResponseWri
     if err := r.Body.Close(); err != nil {
       panic(err)
     }
-    /* We got to write our own Unmarshal to check for required fields */
     if err := json.Unmarshal(body, &newItem); err != nil {
       w.Header().Set("Content-Type", "application/json; charset=UTF-8")
       w.WriteHeader(http.StatusUnprocessableEntity)

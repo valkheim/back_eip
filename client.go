@@ -4,6 +4,7 @@ import (
   "reflect"
   "net/http"
   "fmt"
+  "errors"
 
   "github.com/gorilla/mux"
 )
@@ -21,8 +22,10 @@ func getClientHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 /* Create client (register in db/store) */
-func createClient(T interface{}) {
+func createClient(T interface{}) error {
   client := *(reflect.ValueOf(T).Elem()).Addr().Interface().(*Client)
   fmt.Printf("New client type %T\n", client)
   fmt.Printf("New client %v\n", client)
+  //return errors.New("np")
+  return nil
 }

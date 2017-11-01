@@ -1,2 +1,5 @@
 config file in json
-check if post request body is valid (write own unmarshal implementation)
+
+check if post request body is valid (write own unmarshal implementation) or use this : https://github.com/astaxie/beego/blob/master/validation/README.md
+We need to validate user data in creation functions. These functions can return an error
+
