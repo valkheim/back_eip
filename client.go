@@ -1,6 +1,7 @@
 package main
 
 import (
+  "reflect"
   "net/http"
   "fmt"
   "io"
@@ -13,6 +14,7 @@ import (
 type Client struct {
   Id    int     `json:"id"`
   Name  string  `json:"name"`
+  Age   int     `json:"age"`
 }
 
 /* Get client informations */
@@ -21,10 +23,11 @@ func getClientHandler(w http.ResponseWriter, r *http.Request) {
   fmt.Fprintf(w, "Vars %v\n", vars)
 }
 
-/* Create client */
-func createClientHandler(f func(client Client)) func(w http.ResponseWriter, r *http.Request) {
+/* Create new item */
+func createHandler(f func(T interface{}), T interface{}) func(w http.ResponseWriter, r *http.Request) {
   return func(w http.ResponseWriter, r *http.Request) {
-    var client Client
+    newItem := reflect.ValueOf(T).Interface()
+
     body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
     if err != nil {
       panic(err)
@@ -32,7 +35,7 @@ func createClientHandler(f func(client Client)) func(w http.ResponseWriter, r *h
     if err := r.Body.Close(); err != nil {
       panic(err)
     }
-    if err := json.Unmarshal(body, &client); err != nil {
+    if err := json.Unmarshal(body, &newItem); err != nil {
       w.Header().Set("Content-Type", "application/json; charset=UTF-8")
       w.WriteHeader(http.StatusUnprocessableEntity)
       if err := json.NewEncoder(w).Encode(err); err != nil {
@@ -40,16 +43,16 @@ func createClientHandler(f func(client Client)) func(w http.ResponseWriter, r *h
       }
     }
 
-    f(client)
+    f(newItem)
 
     w.Header().Set("Content-Type", "application/json; charset=UTF-8")
     w.WriteHeader(http.StatusCreated)
-    if err := json.NewEncoder(w).Encode(client); err != nil {
+    if err := json.NewEncoder(w).Encode(newItem); err != nil {
       panic(err)
     }
   }
 }
 
-func createClient(client Client) {
+func createClient(client interface{}) {
   fmt.Printf("New client %v\n", client)
 }
