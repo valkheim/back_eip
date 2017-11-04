@@ -8,3 +8,7 @@ use goroutines to perform requests
 link backend with json store to save persistent data
 might not be a good idea to store json : storing only the data may be better overall
 couchDB/mongoDB/ReJSON(redis)
+
+TLS
+https://blog.bracebin.com/achieving-perfect-ssl-labs-score-with-go
+https://www.slideshare.net/stormpath/secure-your-rest-api-the-right-way

@@ -7,6 +7,7 @@ import (
   "io/ioutil"
   "time"
   "net/http"
+  //"crypto/tls"
   "reflect"
   "encoding/json"
 
@@ -38,6 +39,13 @@ func (app *App) Run() {
     WriteTimeout: app.Timeout * time.Second,
     ReadTimeout:  app.Timeout * time.Second,
     MaxHeaderBytes: 1 << 20, // 1 MB (default value)
+    /*
+    TLSConfig: &tls.Config{
+      ClientAuth: tls.RequestClientCert, // Request client certificate
+      RootCAs:      caCertPool, // self signed certificate
+      InsecureSkipVerify: true, // self signed certificate
+    },
+    */
   }
 
   app.initializeRoutes()
