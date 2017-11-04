@@ -19,6 +19,17 @@ type App struct {
   Router *mux.Router
 }
 
+
+func redirect(w http.ResponseWriter, req *http.Request) {
+  target := "https://" + req.Host + req.URL.Path
+  if len(req.URL.RawQuery) > 0 {
+    target += "?" + req.URL.RawQuery
+  }
+  log.Printf("redirect to: %s", target)
+  http.Redirect(w, req, target,
+  http.StatusTemporaryRedirect)
+}
+
 func (app *App) Run() {
   app.Router = mux.NewRouter()
   srv := &http.Server {
@@ -26,11 +37,14 @@ func (app *App) Run() {
     Addr:         app.Address,
     WriteTimeout: app.Timeout * time.Second,
     ReadTimeout:  app.Timeout * time.Second,
+    MaxHeaderBytes: 1 << 20, // 1 MB (default value)
   }
 
   app.initializeRoutes()
 
   log.Fatal(srv.ListenAndServe())
+  //go http.ListenAndServe(":80", http.HandlerFunc(redirect))
+  //log.Fatal(srv.ListenAndServeTLS("auth/server.crt", "auth/server.key"))
 }
 
 /* Create new item */
