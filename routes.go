@@ -4,6 +4,7 @@ import "net/http"
 
 func addDefaultHeaders(f http.HandlerFunc) http.HandlerFunc {
   return func(w http.ResponseWriter, r *http.Request) {
+    /* Gotta check preloading eligibility */
     w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
     f(w, r)
   }
