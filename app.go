@@ -26,12 +26,13 @@ func redirect(w http.ResponseWriter, req *http.Request) {
   if len(req.URL.RawQuery) > 0 {
     target += "?" + req.URL.RawQuery
   }
-  log.Printf("redirect to: %s", target)
+  log.Printf("Redirect to: %s", target)
   http.Redirect(w, req, target,
   http.StatusTemporaryRedirect)
 }
 
 func (app *App) Run() {
+  go http.ListenAndServe(":80", http.HandlerFunc(redirect))
   app.Router = mux.NewRouter()
 
   cfg := &tls.Config{
@@ -57,6 +58,7 @@ func (app *App) Run() {
   }
 
   app.initializeRoutes()
+
   log.Fatal(srv.ListenAndServeTLS("auth/server.crt", "auth/server.key"))
 }
 

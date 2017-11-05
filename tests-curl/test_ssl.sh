@@ -1,6 +1,6 @@
 #!/bin/sh
 # Test server SSL
-# curl -vvv --ssl-reqd https://127.0.0.1:3000 -k # ignore CA with -k
+# curl -vvv --ssl-reqd https://127.0.0.1:443 -k # ignore CA with -k
 
 hr()
 {
@@ -11,6 +11,6 @@ hr()
 }
 
 hr "Simple ping"
-curl --cacert cacert.pem -vvv --ssl-reqd https://127.0.0.1:3000/debugssl
+curl --cacert cacert.pem -vvv --ssl-reqd https://127.0.0.1/debugssl
 hr "Simple post"
-curl --cacert cacert.pem -vvv --ssl-reqd -H "Content-Type: application/json" -X POST -d '{"id":1,"name":"JP","age":12}' https://127.0.0.1:3000/client
+curl --cacert cacert.pem -vvv --ssl-reqd -H "Content-Type: application/json" -X POST -d '{"id":1,"name":"JP","age":12}' https://127.0.0.1:443/client
