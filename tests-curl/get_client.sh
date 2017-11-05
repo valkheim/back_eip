@@ -1,1 +1,1 @@
-curl -v 127.0.0.1:3000/client/32
+curl -v https://127.0.0.1:3000/client/32 --ssl-reqd --cacert cacert.pem
