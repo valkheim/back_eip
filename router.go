@@ -9,7 +9,8 @@ func NewRouter() *mux.Router {
   router := mux.NewRouter().StrictSlash(true)
   for _, route := range routes {
     var handler http.Handler
-    handler = addDefaultHeaders(route.HandlerFunc)
+    handler = route.HandlerFunc
+    handler = addDefaultHeaders(handler, route.Name)
     handler = Logger(handler, route.Name)
     router.
       Methods(route.Method).

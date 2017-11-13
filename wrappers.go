@@ -41,10 +41,9 @@ func createHandler(f func(T interface{}) error, T interface{}) func(w http.Respo
   })
 }
 
-func addDefaultHeaders(f http.HandlerFunc) http.HandlerFunc {
-  return func(w http.ResponseWriter, r *http.Request) {
-    /* Gotta check preloading eligibility */
+func addDefaultHeaders(inner http.Handler, name string) http.Handler {
+  return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
     w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
-    f(w, r)
-  }
+    inner.ServeHTTP(w, r)
+  })
 }
