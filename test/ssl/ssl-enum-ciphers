@@ -1,0 +1,21 @@
+$> nmap --script ssl-enum-ciphers -p 443 127.0.0.1 > ssl-enum-ciphers
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2017-11-14 18:27 CET
+Nmap scan report for localhost.localdomain (127.0.0.1)
+Host is up (0.000077s latency).
+
+PORT    STATE SERVICE
+443/tcp open  https
+| ssl-enum-ciphers: 
+|   TLSv1.2: 
+|     ciphers: 
+|       TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (secp521r1) - A
+|       TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (secp521r1) - A
+|       TLS_RSA_WITH_AES_256_GCM_SHA384 (rsa 2048) - A
+|       TLS_RSA_WITH_AES_256_CBC_SHA (rsa 2048) - A
+|     compressors: 
+|       NULL
+|     cipher preference: server
+|_  least strength: A
+
+Nmap done: 1 IP address (1 host up) scanned in 0.41 seconds
