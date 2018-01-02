@@ -18,3 +18,24 @@ https://gist.github.com/denji/12b3a568f092ab951456
 Swagger / API UI
 
 http://marcio.io/2015/07/handling-1-million-requests-per-minute-with-golang/
+dl.google.com using go
+https://talks.golang.org/2013/oscon-dl.slide#1
+
+article about rest api w/ go
+https://thenewstack.io/make-a-restful-json-api-go/
+
+Sails.js can create a REST API for you by just typing
+sails generate api <model_name>
+https://sailsjs.com/
+
+Restify (Node.js)
+Express (Node.js)
+HAPI (Node.js)
+
+Falcon Framework
+
+Python + Flask
+Python + Django
+
+Golang with Gorilla
+https://semaphoreci.com/community/tutorials/building-and-testing-a-rest-api-in-go-with-gorilla-mux-and-postgresql
