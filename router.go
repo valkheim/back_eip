@@ -11,6 +11,7 @@ func NewRouter() *mux.Router {
     var handler http.Handler
     handler = route.HandlerFunc
     handler = addDefaultHeaders(handler, route.Name)
+    handler = checkHeaders(handler, route.Name)
     handler = Logger(handler, route.Name)
     router.
       Methods(route.Method).

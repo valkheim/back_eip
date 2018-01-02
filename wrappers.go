@@ -41,6 +41,17 @@ func createHandler(f func(T interface{}) error, T interface{}) func(w http.Respo
   })
 }
 
+func checkHeaders(inner http.Handler, name string) http.Handler {
+  return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+    contentType := r.Header.Get("Content-Type")
+    if contentType == "" || contentType != "application/json" {
+      w.WriteHeader(http.StatusUnsupportedMediaType)
+    } else {
+      inner.ServeHTTP(w, r)
+    }
+  })
+}
+
 func addDefaultHeaders(inner http.Handler, name string) http.Handler {
   return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
     w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
