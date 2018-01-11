@@ -12,7 +12,7 @@ import (
 /* Create new item */
 func createHandler(f func(T interface{}) error, T interface{}) func(w http.ResponseWriter, r *http.Request) {
   return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-    newItem := reflect.ValueOf(T).Interface()
+    newItem := reflect.ValueOf(T).Interface() // get underlying type as run-time under a value and transform it as an interface
     body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
     if err != nil {
       panic(err)

@@ -30,7 +30,12 @@ func deleteClientHandler(w http.ResponseWriter, r *http.Request) {
 
 /* Create client (register in db/store) */
 func createClient(T interface{}) error {
-  client := *(reflect.ValueOf(T).Elem()).Addr().Interface().(*Client)
+  // valueof : get underlying value of interface T
+  // elem : return the value that the interface contains
+  // *().Addr Obtain a pointer to the value
+  // cast/type assertion ?
+  //client := *(reflect.ValueOf(T).Elem()).Addr().Interface().(*Client)
+  client := (reflect.ValueOf(T)).Interface().(*Client)
   fmt.Printf("New client type %T\n", client)
   fmt.Printf("New client %v\n", client)
   if 1 == 2 {
