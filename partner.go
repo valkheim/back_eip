@@ -3,6 +3,7 @@ package main
 import (
   "reflect"
   "fmt"
+  "./store"
 )
 
 type Partner struct {
@@ -13,8 +14,7 @@ type Partner struct {
 /* Create partner (register in db/store) */
 func createPartner(T interface{}) error {
   //partner := *(reflect.ValueOf(T).Elem()).Addr().Interface().(*Partner)
-  partner := (reflect.ValueOf(T)).Interface().(*Partner)
-  fmt.Printf("New partner type %T\n", partner)
-  fmt.Printf("New partner %v\n", partner)
-  return nil
+  p:= (reflect.ValueOf(T)).Interface().(*Partner)
+  req := fmt.Sprintf("HMSET partner:%d id %d name %s", p.Id, p.Id, p.Name)
+  return store.Exec(req)
 }

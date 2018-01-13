@@ -4,9 +4,9 @@ import (
   "reflect"
   "net/http"
   "fmt"
-  "errors"
 
   "github.com/gorilla/mux"
+  "./store"
 )
 
 type Client struct {
@@ -30,16 +30,7 @@ func deleteClientHandler(w http.ResponseWriter, r *http.Request) {
 
 /* Create client (register in db/store) */
 func createClient(T interface{}) error {
-  // valueof : get underlying value of interface T
-  // elem : return the value that the interface contains
-  // *().Addr Obtain a pointer to the value
-  // cast/type assertion ?
-  //client := *(reflect.ValueOf(T).Elem()).Addr().Interface().(*Client)
-  client := (reflect.ValueOf(T)).Interface().(*Client)
-  fmt.Printf("New client type %T\n", client)
-  fmt.Printf("New client %v\n", client)
-  if 1 == 2 {
-    return errors.New("Cannot create client")
-  }
-  return nil
+  c := (reflect.ValueOf(T)).Interface().(*Client)
+  req := fmt.Sprintf("HMSET client:%d id %d name %s age %d", c.Id, c.Id, c.Name, c.Age)
+  return store.Exec(req)
 }
