@@ -9,7 +9,7 @@ import (
   "github.com/gorilla/mux"
 )
 
-type App struct {
+type Api struct {
   Address string
   Timeout time.Duration
   Router *mux.Router
@@ -24,7 +24,7 @@ func redirect(w http.ResponseWriter, req *http.Request) {
   http.Redirect(w, req, target, http.StatusTemporaryRedirect)
 }
 
-func (app *App) Run() {
+func (app *Api) Run() {
   go http.ListenAndServe(":80", http.HandlerFunc(redirect))
   if app.Router == nil {
     app.Router = NewRouter()
