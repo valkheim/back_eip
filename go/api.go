@@ -25,6 +25,7 @@ func redirect(w http.ResponseWriter, req *http.Request) {
 }
 
 func (app *Api) Run() {
+  /* This redirection should be the reverse proxy job */
   go http.ListenAndServe(":80", http.HandlerFunc(redirect))
   if app.Router == nil {
     app.Router = NewRouter()
