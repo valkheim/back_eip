@@ -5,6 +5,7 @@ import (
   "github.com/gorilla/mux"
 )
 
+// NewRouter creates a gorilla/mux router and binds routes and its middlewares.
 func NewRouter() *mux.Router {
   router := mux.NewRouter().StrictSlash(true)
   for _, route := range routes {

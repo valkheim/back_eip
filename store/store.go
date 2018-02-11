@@ -15,13 +15,13 @@ func init() {
     var err error
     // Establish a pool of 10 connections to the Redis server listening on
     // port 6379 of the local machine.
-    //p, err = pool.New("tcp", "localhost:6379", 10)
     p, err = pool.New("tcp", "store:6379", 10)
     if err != nil {
         log.Panic(err)
     }
 }
 
+// Get represents the accessor of redis' pool.
 func Get() *pool.Pool {
   return p;
 }
@@ -64,16 +64,17 @@ func respToArray(r *redis.Resp) []string {
   return arr
 }
 
+// GetAllKeys returns all keys from redis' pool.
 func GetAllKeys() []string {
   reply, err := execute("KEYS *")
   if err != nil {
     fmt.Print(err)
     return nil
-  } else {
-    return respToArray(reply)
   }
+  return respToArray(reply)
 }
 
+// Exec send a req redis request to redis and may return an error from redis.
 func Exec(req string) error {
   fmt.Print("exec : `", req, "`\n")
   _, err := execute(req)
