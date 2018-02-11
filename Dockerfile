@@ -1,4 +1,5 @@
-FROM alpine
+FROM alpine:latest
+MAINTAINER Charles Paulet <charles.paulet@epitech.eu>
 
 COPY . /tmp/api/
 
@@ -21,5 +22,3 @@ RUN set -ex \
 WORKDIR /
 
 ENTRYPOINT ["/api"]
-
-#EXPOSE 80 443
