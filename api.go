@@ -9,7 +9,8 @@ import (
   "github.com/gorilla/mux"
 )
 
-type Api struct {
+// API represents the api structure and its options.
+type API struct {
   Address string
   Timeout time.Duration
   Router *mux.Router
@@ -24,7 +25,8 @@ func redirect(w http.ResponseWriter, req *http.Request) {
   http.Redirect(w, req, target, http.StatusTemporaryRedirect)
 }
 
-func (app *Api) Run() {
+// Run configure TLS and starts the api.
+func (app *API) Run() {
   /* This redirection should be the reverse proxy job */
   go http.ListenAndServe(":80", http.HandlerFunc(redirect))
   if app.Router == nil {
