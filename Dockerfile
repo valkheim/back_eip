@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM golang:1.9-alpine3.7
 MAINTAINER Charles Paulet <charles.paulet@epitech.eu>
 
 COPY . /tmp/api/
@@ -6,8 +6,7 @@ COPY . /tmp/api/
 WORKDIR /tmp/api
 
 RUN set -ex \
-      && echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-      && apk --no-cache add musl-dev git go@edge \
+      && apk --no-cache add musl-dev git \
       && export GOPATH=/tmp/api \
       && export GOBIN=/ \
       && git config --global http.https://gopkg.in.followRedirects true \
@@ -18,6 +17,6 @@ RUN set -ex \
       && mv /tmp/api/auth/server.rsa.crt /auth/server.crt \
       && mv /tmp/api/auth/server.rsa.key /auth/server.key \
       && rm -rf /tmp/api \
-      && apk del git go
+      && apk del git
 
 ENTRYPOINT ["/api"]
