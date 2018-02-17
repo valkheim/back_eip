@@ -1,6 +1,6 @@
 FROM redis:4.0-alpine
 MAINTAINER Charles Paulet <charles.paulet@epitech.eu>
 
-ENV REDIS_PASSWORD $V|>3|--p4//0|>D
+ENV REDIS_PASSWORD foobar
 
 CMD ["sh", "-c", "exec redis-server --requirepass \"$REDIS_PASSWORD\""]

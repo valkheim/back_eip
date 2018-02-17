@@ -16,7 +16,7 @@ func df(network, addr string) (*redis.Client, error) {
 	if err != nil {
 		return nil, err
 	}
-	if err = client.Cmd("AUTH", "$V|>3|--p4//0|>D").Err; err != nil {
+	if err = client.Cmd("AUTH", "foobar").Err; err != nil {
 		client.Close()
 		return nil, err
 	}
