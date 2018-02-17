@@ -1,7 +1,9 @@
 version: '3.2'
 services:
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.api
     ports:
       - "127.0.0.1:80:80"
       - "127.0.0.1:443:443"
@@ -9,6 +11,8 @@ services:
       - store
     command: ["./wait-for-it.bash", "store:6379", "--", "/api"]
   store:
-    image: redis
+    build:
+      context: .
+      dockerfile: Dockerfile.store
     ports:
       - "127.0.0.1:6379:6379"
