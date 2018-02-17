@@ -29,12 +29,12 @@ CMD_STORE="$STORE $STORE_CONF >$STORE_DUMP 2>&1"
 CMD_API="$API >$API_DUMP 2>&1"
 
 check_tcp() {
-  ping -c 1 $1 &>/dev/null || { echo "add \"127.0.0.1 $1\" to /etc/hosts" && exit 1; }
+  ping -c 1 "$1" >/dev/null 2>&1 || { echo "add \"127.0.0.1 $1\" to /etc/hosts" && exit 1; }
 }
 
 rm_dumps()
 {
-  [ -e "$1" ] && echo "remove $1" && rm -f $1
+  [ -e "$1" ] && echo "remove $1" && rm -f "$1"
 }
 
 run_cmd()
@@ -45,8 +45,8 @@ run_cmd()
 wait_for_store()
 {
   echo "wait for store..."
-  if [[ $(nc -z $HOST_STORE 6379) -eq 0 ]]; then
-    sleep .5 && break
+  if nc -z $HOST_STORE 6379; then
+    sleep .5 && return
   else
     wait_for_store
   fi
