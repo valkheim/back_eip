@@ -14,7 +14,13 @@ Rest API in Golang
 
 ## Getting started
 
-You must install golang and redis at least ofc.
+You must install golang and redis at least ofc. You also must
+generate server certificate and key. Retrieve also certificate (cacert.pem) to
+run curl tests (or use -k option). You might be able to retrieve where it
+belong on auth/server.crt or remotely by using :
+```
+$ openssl s_client -connect HOST:443 -showcerts
+```
 
 ### Dockerize
 
