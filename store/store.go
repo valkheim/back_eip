@@ -11,11 +11,23 @@ import (
 
 var p *pool.Pool
 
+func df(network, addr string) (*redis.Client, error) {
+	client, err := redis.Dial(network, addr)
+	if err != nil {
+		return nil, err
+	}
+	if err = client.Cmd("AUTH", "$V|>3|--p4//0|>D").Err; err != nil {
+		client.Close()
+		return nil, err
+	}
+	return client, nil
+}
+
 func init() {
 	var err error
 	// Establish a pool of 10 connections to the Redis server listening on
 	// port 6379 of the local machine.
-	p, err = pool.New("tcp", "store:6379", 10)
+	p, err = pool.NewCustom("tcp", "store:6379", 10, df)
 	if err != nil {
 		log.Panic(err)
 	}
