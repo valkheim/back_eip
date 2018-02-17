@@ -29,7 +29,7 @@ You can start the service without docker.
 To do so, add `api` and `store` as local hosts via `/etc/hosts`. Then, start
 the `local.sh` script. It will init GroomShop api and start logging in files.
 ```
-# local.sh ; tail -f *.dumps
+# local.sh && tail -f *.dump
 ```
 Be sure to stop background process when needed:
 ```

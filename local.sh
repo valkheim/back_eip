@@ -45,7 +45,11 @@ run_cmd()
 wait_for_store()
 {
   echo "wait for store..."
-  nc -z $HOST_STORE 6379 && { sleep .5; return; } || wait_for_store
+  if [[ $(nc -z $HOST_STORE 6379) -eq 0 ]]; then
+    sleep .5 && break
+  else
+    wait_for_store
+  fi
 }
 
 check_tcp $HOST_API
