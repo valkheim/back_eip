@@ -3,3 +3,4 @@ eip
 *.crt
 *.pem
 *.key
+*.dump
