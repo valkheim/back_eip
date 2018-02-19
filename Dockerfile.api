@@ -7,7 +7,7 @@ WORKDIR /tmp/api
 
 RUN set -ex \
       && echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-      && apk --no-cache add musl-dev git go@edge \
+      && apk --no-cache add musl-dev git 'go@edge=1.9.4-r0' \
       && export GOPATH=/tmp/api \
       && export GOBIN=/ \
       && git config --global http.https://gopkg.in.followRedirects true \
