@@ -1,0 +1,2 @@
+faire un schéma de données dans la redis et adapter test/redis/populate.sh
+virer les panic de wrappers.go
