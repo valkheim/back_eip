@@ -1,6 +1,4 @@
-# Backend Groomshop
-
-Rest API in Golang
+# Rest API in Golang
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a1a7593063044011995d27c53372625c)](https://www.codacy.com/app/valkheim/back_eip?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=valkheim/back_eip&amp;utm_campaign=Badge_Grade)
 [![Go Report Card](https://goreportcard.com/badge/github.com/valkheim/back_eip)](https://goreportcard.com/report/github.com/valkheim/back_eip)
